@@ -1,0 +1,7 @@
+spring.application.name=demo
+spring.datasource.url=jdbc:sqlserver://localhost;databaseName=usuario
+spring.datasource.username=sa
+spring.datasource.password=@ITB123456
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.SQLServerDialect

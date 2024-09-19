@@ -1,0 +1,43 @@
+package com.test.serviceimpl;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserServiceImpl {
+	 @Autowired
+	    private UserRepository userRepository;
+
+	    @Autowired
+	    private BCryptPasswordEncoder passwordEncoder;
+
+	    @Override
+	    public User registerUser(String username, String password) {
+	        User user = new User();
+	        user.setUsername(username);
+	        user.setPassword(passwordEncoder.encode(password));
+	        return userRepository.save(user);
+	    }
+
+	    @Override
+	    public User findUserByUsername(String username) {
+	        return userRepository.findByUsername(username);
+	    }
+
+	    @Override
+	    public List<User> getAllUsers() {
+	        return userRepository.findAll(); // Busca todos os usuários
+	    }
+	}
+	3. Atualização do Repositório UserRepository
+	Certifique-se de que o seu repositório UserRepository possui um método para buscar todos os usuários. Normalmente, o método findAll() já está disponível se você estender JpaRepository:
+
+	java
+	Copiar código
+	package com.example.demo.repository;
+
+	import com.example.demo.model.User;
+	import org.springframework.data.jpa.repository.JpaRepository;
+
+	public interface UserRepository extends JpaRepository<User, Long> {
+	    User findByUsername(String username);
+}

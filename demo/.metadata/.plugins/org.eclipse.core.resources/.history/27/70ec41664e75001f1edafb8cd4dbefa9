@@ -1,0 +1,30 @@
+package com.test.serviceimpl;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserServiceImpl {
+	 @Autowired
+	 private UserRepository userRepository;
+
+	 @Autowired
+	 private BCryptPasswordEncoder passwordEncoder;
+	    
+	  @Override
+	    public User registerUser(String username, String password) {
+	        User user = new User();
+	        user.setUsername(username);
+	        user.setPassword(passwordEncoder.encode(password));
+	        return userRepository.save(user);
+	    }
+
+	    @Override
+	    public User findUserByUsername(String username) {
+	        return userRepository.findByUsername(username);
+	    }
+
+	    @Override
+	    public List<User> getAllUsers() {
+	        return userRepository.findAll(); // Busca todos os usuários
+	    }  
+}
